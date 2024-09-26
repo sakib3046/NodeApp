@@ -12,6 +12,13 @@ res.end("<h1>This is Test Server</h1>")
 // res.writeHead(200, {"Content-Type":"application/json" })
 // res.end(JSON.stringify( {msg : 'Server error msg'}))
 
+
+
+console.log(req.url);
+console.log(req.method);
+
+
+
 });
 
 server.listen(PORT,()=>{
