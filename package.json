@@ -2,13 +2,20 @@
   "name": "nodeapp",
   "version": "1.0.0",
   "description": "For Learning",
-  "main": "index.js",
+  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --env-file=.env src/server.js"
   },
   "keywords": [
     "node"
   ],
   "author": "sakib3046",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }
