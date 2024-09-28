@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --env-file=.env src/server.js"
+    "server": "nodemon --env-file=.env src/server.js",
+    "apiserver": "nodemon --env-file=.env src/apiserver.js"
   },
   "keywords": [
     "node"
