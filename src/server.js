@@ -1,11 +1,12 @@
 import http from "http";
 import url from "url";
-
+import fs from 'node:fs/promises';
+import path from "path"
 const PORT =process.env.PORT;
 const __filename =url.fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-
-const server = http.createServer((req,res)=>{
+const server = http.createServer( async(req,res)=>{
 // res.write("Hello this is test server");
 // res.end();
 
@@ -18,20 +19,25 @@ const server = http.createServer((req,res)=>{
 
 try {
     if (req.method === 'GET') {
+        let filepath;
         console.log("Get Request connected to server");
         if (req.url==='/') {
-            console.log(__filename);
-            
-            res.setHeader("Content-Type","text/html")  
-            res.end("<h1> Home</h1>")          
+            filepath = path.join(__dirname, "index.html");
+            // res.setHeader("Content-Type","text/html")  
         }
-        if (req.url==='/about') {
-            res.setHeader("Content-Type","text/html")  
-            res.end("<h1> About</h1>")     
+        else if (req.url==='/about') {
+            filepath = path.join(__dirname, "about.html");
+            // res.setHeader("Content-Type","text/html")  
+            // res.end("<h1> About</h1>")     
         } else {
-           res.writeHead(404, {"Content-Type":"text/plain"}); 
-           res.end("Server Not Found");
+            throw new Error("Page Not Found");
+        //    res.writeHead(404, {"Content-Type":"text/plain"}); 
+        //    res.end("Server Not Found");
         }
+        const data= await fs.readFile(filepath);
+        res.write(data);
+        res.setHeader("Content-Type","text/html");
+        res.end();
     }
     
 } catch (error) {
